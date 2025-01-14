@@ -87,7 +87,7 @@ To facilitate loading by `ecg_ppg_dataset.py` the data should be organized as fo
 - All `.csv` files should be stored together in a **single folder**.
 
 
-# Setup
+## Cluster Setup
 
 Follow the steps below to set up your environment and prepare for running the training, testing, and quantization scripts on the CSCS cluster. This code is for a Windows PC so you might have to adjust certain commands.
 
