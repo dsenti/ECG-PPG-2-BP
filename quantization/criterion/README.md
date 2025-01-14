@@ -1,5 +1,4 @@
-# Disclaimer
-### this README.md is from the TimeFM repo
+### Disclaimer: this README is from the TimeFM repo
 
 ## Criterions
 
