@@ -8,11 +8,11 @@ This project focuses on blood pressure estimation using ECG and PPG signals. The
 
 The repository is organized as follows:
 
-- **`training/`**
+- **[`training/`](https://github.com/dsenti/ECG-PPG-2-BP/tree/main/training)**
   - Contains scripts for training and testing the model.
   - Includes functionality for data preprocessing, model fine-tuning, and evaluation on validation/test datasets.
   
-- **`quantization/`**
+- **[`quantization/`](https://github.com/dsenti/ECG-PPG-2-BP/tree/main/quantization)**
   - Provides tools for model quantization to reduce its size and improve efficiency.
   - Useful as a first step towards deploying the model on resource-constrained devices.
 
@@ -22,14 +22,14 @@ The repository is organized as follows:
 This code is designed to run on the CSCS cluster, Piz Daint. Refer to the section on how to set up an environment below.
 
 1. **Training:**
-   - To train the model, submit the `training` job script using the `sbatch` command.
+   - To train the model, submit the [`train.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/train.sbatch) job script using the `sbatch` command.
      ```bash
      sbatch train.sbatch
      ```
-   - The `train.sbatch` script is configured to:
+   - The [`train.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/train.sbatch) script is configured to:
      - Use 1 node with 4 GPUs.
      - Train the model for up to 24h with parameters specified in the script.
-   - Example SLURM settings in `train.sbatch`:
+   - Example SLURM settings in [`train.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/train.sbatch):
      ```bash
      #SBATCH --job-name=finetuning
      #SBATCH --nodes=1
@@ -40,31 +40,31 @@ This code is designed to run on the CSCS cluster, Piz Daint. Refer to the sectio
      #SBATCH --account=lp12
      ```
 
-   - `train.sbatch` calls `train.py`. Here is an example command:
+   - [`train.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/train.sbatch) calls [`train.py`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/training/train.py). Here is an example command:
      ```bash
      python -u train.py --wandb_name 'M_l_ft_wh_1000ep' --dataset 'MIMIC' --model_size 'large' --num_epochs 1000 --pretrained True --freeze_backbone False --patience 50 --learning_rate 1e-4 --batch_size 1024
      ```
 
 2. **Testing:**
-   - Testing is included in the training process, but if the job is interrupted, you can test a specific checkpoint using the `test` job script.
+   - Testing is included in the training process, but if the job is interrupted, you can test a specific checkpoint using the [`test.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/test.sbatch) job script.
      ```bash
      sbatch test.sbatch
      ```
    - Example SLURM settings are available in the Training section for reference.
 
-   -  An example of how `test.py` can be called is given in `test.sbatch`:
+   -  An example of how [`test.py`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/training/test.py) can be called is given in [`test.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/test.sbatch):
      ```bash
      python -u test.py --model_checkpoint 'checkpoint_M_l_ft_wh_1000ep.pt' --dataset 'MIMIC' --model_size 'large' --batch_size 1024
      ```
 
 3. **Quantization:**
-   - To quantize the model for deployment, submit the `quantization` job script.
+   - To quantize the model for deployment, submit the [`quantization.sbatch`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/quantization.sbatch) job script.
      ```bash
      sbatch quantization.sbatch
      ```
    - Example SLURM settings are available in the Training section for reference.
 
-   - The script performs quantization by calling `ptq_dynamic.py` or `ptq_static.py`. Here is an example usage:
+   - The script performs quantization by calling [`ptq_dynamic.py`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/quantization/ptq_dynamic.py) or [`ptq_static.py`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/quantization/ptq_static.py). Here is an example usage:
      ```bash
      python -u ptq_dynamic.py --model_size 'large' --dataset 'MIMIC' --model_checkpoint 'final_model_M_l_ft_wh_100ep.ckpt' --batch_size 64
      ```
@@ -81,7 +81,7 @@ To prepare the dataset for model training and evaluation, verify that both subse
 2. **PPG Features:** Columns named `PPG_F_1` to `PPG_F_1250`, representing PPG signals aligned with the ECG signals.
 3. **Target Values:** Columns `SegDBP_AVG` and `SegSBP_AVG`, representing the average diastolic and systolic blood pressure values for each sample.
 
-To facilitate loading by `ecg_ppg_dataset.py` the data should be organized as follows:
+To facilitate loading by [`ecg_ppg_dataset.py`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/training/datasets/ecg_ppg_dataset.py) the data should be organized as follows:
 - All data files must be in `.csv` format.
 - Each file should begin with either `Vital` or `MIMIC` in its name, corresponding to the respective dataset subset.
 - All `.csv` files should be stored together in a **single folder**.
@@ -130,7 +130,7 @@ Follow the steps below to set up your environment and prepare for running the tr
      ```
 
 7. **Create a Virtual Environment:**
-   - Once on the cluster, create a virtual environment and install the required dependencies (`requirements.txt` is available in this folder):
+   - Once on the cluster, create a virtual environment and install the required dependencies ([`requirements.txt`](https://github.com/dsenti/ECG-PPG-2-BP/blob/main/requirements) is available in this folder):
      ```bash
      python -m venv <your_venv_name>
      source <your_venv_name>/bin/activate
