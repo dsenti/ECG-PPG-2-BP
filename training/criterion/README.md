@@ -1,3 +1,4 @@
+### Disclaimer: this README is from the TimeFM repo
 ## Criterions
 
 A criterion defines the details of our loss function.
