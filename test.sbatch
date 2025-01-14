@@ -19,7 +19,7 @@ python --version
 which pip
 
 # Change to the TimeFM directory
-cd $HOME/code/TimeFM
+cd $HOME/training/
 
 # python split_data_correlated_MIMIC.py
 # Run the finetuning script

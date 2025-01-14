@@ -19,7 +19,7 @@ python --version
 which pip
 
 # Change to the TimeFM directory
-cd $HOME/code/TimeFM
+cd $HOME/training/
 
 # Run the finetuning script
 python -u train.py --wandb_name 'M_l_ft_wh_1000ep' --dataset 'MIMIC' --model_size 'large' --num_epochs 1000 --pretrained True --freeze_backbone False --patience 50 --learning_rate 1e-4 --batch_size 1024

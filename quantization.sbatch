@@ -19,7 +19,7 @@ python --version
 which pip
 
 # Change to the quantization directory
-cd $HOME/TimeFM_quantization/
+cd $HOME/quantization/
 
 # Run the finetuning script
 python -u ptq_dynamic.py --model_size 'large' --dataset 'MIMIC' --model_checkpoint 'final_model_M_l_ft_wh_100ep.ckpt' --batch_size 64
