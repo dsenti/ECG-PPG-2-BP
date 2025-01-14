@@ -2,6 +2,8 @@
 
 This project focuses on blood pressure estimation using ECG and PPG signals. The model is a fine-tuned transformer, originally pretrained on EEG data (the TimeFM project, hence the TimeFM references throughout this repository). For more information, please refer to our report.
 
+**Disclaimer:** To ensure transparency, all components that are not our own work will be explicitly labeled as being sourced from the TimeFM repository by the README.md in their folder or parent folder.
+
 ## Project Structure
 
 The repository is organized as follows:
